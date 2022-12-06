@@ -11,11 +11,11 @@ const images = [
     { id: "8", url: "./img/cat8.jpg" },
 ];
 
-const container = document.querySelector(".containerItems");
+const containerItems = document.querySelector(".containerItems");
 
-const loadImages = (images, container) => {
+const loadImages = (images, containerItems) => {
     images.forEach((image) => {
-        container.innerHTML += `
+        containerItems.innerHTML += `
     <div class='item'>
       <img src="${image.url}"
     </div>
@@ -23,4 +23,21 @@ const loadImages = (images, container) => {
     });
 };
 
-loadImages(images, container);
+loadImages(images, containerItems);
+
+let items = document.querySelectorAll(".item");
+
+const next = () => {
+    containerItems.appendChild(items[0]);
+    items = document.querySelectorAll(".item");
+};
+
+document.querySelector("#next").addEventListener("click", next);
+
+const previous = () => {
+    const lastItem = items[items.length - 1];
+    containerItems.insertBefore(lastItem, items[0]);
+    items = document.querySelectorAll(".item");
+};
+
+document.querySelector("#previous").addEventListener("click", previous);
